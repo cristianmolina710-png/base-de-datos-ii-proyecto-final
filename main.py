@@ -1,2 +1,10 @@
-print("My Café - Sistema de gestión")
-print("Conexión con Python exitosa")
+from base_datos.conexion import conectar_mysql
+
+conexion = conectar_mysql()
+print("Conexion con MySQL exitosa")
+conexion.close()
+
+from logica.sesiones import listar_sesiones
+
+listar_sesiones(2)
+
