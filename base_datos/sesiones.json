@@ -1,0 +1,64 @@
+[{
+  "_id": {
+    "$oid": "6b04cf716715020264600fce"
+  },
+  "id_usuario": 2,
+  "fecha": "2026-11-23",
+  "rutina": "Rutina de pecho",
+  "ejercicios": [
+    {
+      "id_ejercicio": 1,
+      "nombre": "Press de banca",
+      "series": [
+        {
+          "peso": 40,
+          "repeticiones": 12
+        },
+        {
+          "peso": 45,
+          "repeticiones": 10
+        },
+        {
+          "peso": 45,
+          "repeticiones": 8
+        }
+      ]
+    },
+    {
+      "id_ejercicio": 4,
+      "nombre": "Flexiones",
+      "series": [
+        {
+          "peso": 0,
+          "repeticiones": 15
+        },
+        {
+          "peso": 0,
+          "repeticiones": 12
+        }
+      ]
+    }
+  ],
+  "observaciones": "Buen entrenamiento, aumenté el peso."
+},
+{
+  "_id": {
+    "$oid": "6b04e1980db1b7a5b6cf281f"
+  },
+  "id_usuario": 2,
+  "fecha": "2026-11-23",
+  "rutina": "Rutina de pecho",
+  "ejercicios": [
+    {
+      "nombre": "Press de banca",
+      "series": 4,
+      "repeticiones": 12
+    },
+    {
+      "nombre": "Curl de biceps",
+      "series": 3,
+      "repeticiones": 15
+    }
+  ],
+  "observaciones": "Entrenamiento de prueba desde Python"
+}]
