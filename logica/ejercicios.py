@@ -1,4 +1,3 @@
-
 from base_datos.conexion import conectar_mysql
 
 
@@ -6,7 +5,7 @@ def listar_ejercicios():
     conexion = conectar_mysql()
     cursor = conexion.cursor()
 
-    cursor.execute("SELECT id_ejercicio, nombre FROM Ejercicios")
+    cursor.execute("SELECT id_ejercicio, nombre FROM ejercicios")
 
     ejercicios = cursor.fetchall()
 
@@ -18,19 +17,27 @@ def listar_ejercicios():
 
 def listar_ejercicios_completos():
     conexion = conectar_mysql()
-    cursor = conexion.cursor()
+    cursor = conexion.cursor(dictionary=True)
 
-    cursor.execute("""
-        SELECT Ejercicios.nombre, Equipos.nombre
-        FROM Ejercicios
-        INNER JOIN Equipos
-        ON Ejercicios.id_equipo = Equipos.id_equipo
-    """)
-
+    consulta = """
+        SELECT 
+            e.id_ejercicio,
+            e.nombre AS ejercicio,
+            t.nombre AS tipo,
+            COALESCE(eq.nombre, 'Sin equipo') AS equipo,
+            COALESCE(GROUP_CONCAT(g.nombre SEPARATOR ', '), 'General') AS grupos_musculares
+        FROM ejercicios e
+        INNER JOIN tiposejercicios t ON e.id_tipo = t.id_tipo
+        LEFT JOIN equipos eq ON e.id_equipo = eq.id_equipo
+        LEFT JOIN ejerciciosgruposmusculares eg ON e.id_ejercicio = eg.id_ejercicio
+        LEFT JOIN gruposmusculares g ON eg.id_grupo = g.id_grupo
+        GROUP BY e.id_ejercicio, e.nombre, t.nombre, eq.nombre
+        ORDER BY e.id_ejercicio
+    """
+    cursor.execute(consulta)
     resultados = cursor.fetchall()
-
-    for resultado in resultados:
-        print(resultado)
 
     cursor.close()
     conexion.close()
+
+    return resultados

@@ -1,10 +1,12 @@
-from base_datos.conexion import conectar_mysql
+import tkinter as tk
+from interfaz.login import VentanaLogin
 
-conexion = conectar_mysql()
-print("Conexion con MySQL exitosa")
-conexion.close()
 
-from logica.sesiones import listar_sesiones
+def main():
+    root = tk.Tk()
+    VentanaLogin(root)
+    root.mainloop()
 
-listar_sesiones(2)
 
+if __name__ == "__main__":
+    main()
